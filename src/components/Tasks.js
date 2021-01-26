@@ -1,6 +1,12 @@
-const Tasks = () => {
+import Task from './Task'
+
+const Tasks = ({tasks}) => {
     return (
-        <p>Task 1</p>
+        <>
+            {tasks.map((task) => (
+                <Task task={task}/>
+            ))}
+        </>
     )
 }
 
