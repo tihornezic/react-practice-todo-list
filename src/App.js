@@ -24,10 +24,16 @@ function App() {
     }
   ])
 
+  const toggleReminder = function(id) {
+    setTasks(tasks.map((task) => 
+      task.id === id ? {...task, reminder: !task.reminder} : task
+    ))
+  }
+
   return (
     <div className='container'>
       <Header />
-      <Tasks tasks={tasks} />
+      <Tasks tasks={tasks} onToggle={toggleReminder} />
     </div>
   );
 }

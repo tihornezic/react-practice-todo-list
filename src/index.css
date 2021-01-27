@@ -17,7 +17,7 @@ body {
   margin: 30px auto;
   border: 1px solid mediumvioletred;
   border-radius: 5px;
-  padding: 40px;
+  padding: 30px;
 }
 
 .header {
@@ -68,9 +68,18 @@ body {
 }
 
 .task h3 {
+  display: flex;
+  justify-content: space-between;
   font-weight: 600;
 }
 
 .task p {
+  display: flex;
+  justify-content: space-between;
   font: 300;
+}
+
+.reminder-bulb {
+  color: rebeccapurple;
+  font-size: 21px;
 }
