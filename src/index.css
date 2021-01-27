@@ -34,9 +34,8 @@ body {
 
 .btn {
   display: flex;
-  
-  background-color: rgb(31, 143, 59);
-  padding: 20px 55px;
+  background-color: rgb(141, 140, 140);
+  padding: 10px 55px;
   border: none;
   border-radius: 5px;
   height: 45px;
