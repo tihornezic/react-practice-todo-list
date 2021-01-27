@@ -3,12 +3,22 @@ import {FaRegLightbulb} from "react-icons/fa";
 import {FaLightbulb} from "react-icons/fa";
 
 const Task = ({task, onToggle}) => {
+    const onRemindOn = () => {
+        alert('Reminder added!')
+        return
+    }
+
+    const onRemindOff = () => {
+        alert('Reminder removed!')
+        return
+    }
+
     return (
         <>
             <div className='task'>
                 <h3>{task.text} <FaTimes style={{color: 'rgb(81, 28, 134)', cursor: 'pointer'}} /></h3>
                 <p>
-                    {task.date} {task.reminder ? <FaLightbulb className='reminder-bulb' style={{cursor: 'pointer'}} onClick={() => {onToggle(task.id)}} /> : <FaRegLightbulb className='reminder-bulb' style={{cursor: 'pointer'}} onClick={() => {onToggle(task.id)}} />}
+                    {task.date} {task.reminder ? <FaLightbulb className='reminder-bulb' style={{cursor: 'pointer'}} onClick={() => {onToggle(task.id); onRemindOff()}} /> : <FaRegLightbulb className='reminder-bulb' style={{cursor: 'pointer'}} onClick={() => {onToggle(task.id); onRemindOn() }} />}
                 </p>
             </div>
         </>
