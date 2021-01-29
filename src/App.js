@@ -19,14 +19,37 @@ function App() {
   const fetchTasks = async () => {
     const response = await fetch('http://localhost:5001/tasks')
     // to convert JSON to JS object
-    const data = response.json()
+    const data = await response.json()
 
     return data
   }
  
-  const toggleReminder = function (id) {
+  // fatch a task
+  const fetchTask = async (id) => {
+    const response = await fetch(`http://localhost:5001/tasks/${id}`)
+    const data = await response.json()
+
+    return data
+  }
+
+  // toggle reminder
+  const toggleReminder = async function (id) {
+    // in order to toggle reminder on a specific task,
+    // need to create a fetch for a single task
+    const taskToToggle = await fetchTask(id)
+    const updatedTask = {...taskToToggle, reminder: !taskToToggle.reminder}
+    const response = await fetch(`http://localhost:5001/tasks/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(updatedTask)
+    })
+
+    const data = await response.json()
+
     setTasks(tasks.map((task) =>
-      task.id === id ? {...task, reminder: !task.reminder} : task
+      task.id === id ? {...task, reminder: data.reminder} : task
     ))
   }
 

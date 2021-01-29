@@ -4,12 +4,12 @@
       "id": 1,
       "text": "Learn React",
       "date": "29 Jan 2021 19:00",
-      "reminder": false
+      "reminder": true
     },
     {
-      "text": "Make toggle reminder persist (on json server)",
-      "date": "29 Jan 2021 20:25",
-      "reminder": false,
+      "text": "Implement Toggle ",
+      "date": "29 Jan 2021 21:20",
+      "reminder": true,
       "id": 2
     }
   ]
