@@ -1,32 +1,29 @@
-import { useState } from 'react'
+import {useState, useEffect} from 'react'
 import Header from './components/Header'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
 
 function App() {
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      text: 'Go get woods',
-      date: '26/01/2020 at 16:00',
-      reminder: false
-    },
-    {
-      id: 2,
-      text: 'Wash the dishes',
-      date: '26/01/2020 at 17:00',
-      reminder: false
-    },
-    {
-      id: 3,
-      text: 'Iron the clothes',
-      date: '26/01/2020 at 19:00',
-      reminder: false
-    }
-  ])
+  const [tasks, setTasks] = useState([])
 
-  const toggleReminder = function(id) {
-    setTasks(tasks.map((task) => 
+  useEffect(() => {
+    const getTasks = async () => {
+      const tasksFromServer = await fetchTasks()
+      setTasks(tasksFromServer)
+    }
+
+    getTasks()
+  }, [])
+
+  const fetchTasks = async () => {
+    const response = await fetch('http://localhost:5001/tasks')
+    const data = response.json()
+
+    return data
+  }
+ 
+  const toggleReminder = function (id) {
+    setTasks(tasks.map((task) =>
       task.id === id ? {...task, reminder: !task.reminder} : task
     ))
   }
@@ -45,7 +42,8 @@ function App() {
     <div className='container'>
       <Header />
       <AddTask onAdd={addTask} />
-      <Tasks tasks={tasks} onToggle={toggleReminder} onDelete={deleteTask} />
+      {tasks.length > 0 ? <Tasks tasks={tasks} onToggle={toggleReminder}
+        onDelete={deleteTask} /> : <div className='no-to-do'>No Tasks To Do!</div>}
     </div>
   );
 }
