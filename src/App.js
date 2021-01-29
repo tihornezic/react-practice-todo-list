@@ -15,8 +15,10 @@ function App() {
     getTasks()
   }, [])
 
+  // fetch tasks
   const fetchTasks = async () => {
     const response = await fetch('http://localhost:5001/tasks')
+    // to convert JSON to JS object
     const data = response.json()
 
     return data
@@ -32,10 +34,23 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id))
   }
 
-  const addTask = (task) => {
-    const id = Math.floor(Math.random() * 10000) + 1
+  // add task
+  const addTask = async (task) => {
+    const response = await fetch('http://localhost:5001/tasks', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      // convert it to JSON
+      body: JSON.stringify(task)
+    })
+
+    const data = await response.json()
+    setTasks([...tasks, data])
+
+    /* const id = Math.floor(Math.random() * 10000) + 1
     const newTask = {id, ...task}
-    setTasks([...tasks, newTask])
+    setTasks([...tasks, newTask]) */
   }
 
   return (
