@@ -5,6 +5,7 @@ import AddTask from './components/AddTask'
 
 function App() {
   const [tasks, setTasks] = useState([])
+  const [showAddTask, setShowAddTask] = useState(true)
 
   useEffect(() => {
     const getTasks = async () => {
@@ -82,8 +83,8 @@ function App() {
 
   return (
     <div className='container'>
-      <Header />
-      <AddTask onAdd={addTask} />
+      <Header onAdd={() => setShowAddTask(!showAddTask)} />
+      {showAddTask && <AddTask onAdd={addTask} />}
       {tasks.length > 0 ? <Tasks tasks={tasks} onToggle={toggleReminder}
         onDelete={deleteTask} /> : <div className='no-to-do'>No Tasks To Do!</div>}
     </div>
