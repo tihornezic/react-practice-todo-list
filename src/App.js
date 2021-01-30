@@ -1,7 +1,10 @@
 import {useState, useEffect} from 'react'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Header from './components/Header'
 import Tasks from './components/Tasks'
 import AddTask from './components/AddTask'
+import Footer from './components/Footer'
+import About from './components/About'
 
 function App() {
   const [tasks, setTasks] = useState([])
@@ -24,7 +27,7 @@ function App() {
 
     return data
   }
- 
+
   // fatch a task
   const fetchTask = async (id) => {
     const response = await fetch(`http://localhost:5001/tasks/${id}`)
@@ -82,12 +85,21 @@ function App() {
   }
 
   return (
-    <div className='container'>
-      <Header onAdd={() => setShowAddTask(!showAddTask)} />
-      {showAddTask && <AddTask onAdd={addTask} />}
-      {tasks.length > 0 ? <Tasks tasks={tasks} onToggle={toggleReminder}
-        onDelete={deleteTask} /> : <div className='no-to-do'>No Tasks To Do!</div>}
-    </div>
+    // to use router, wrap everything inside router
+    <Router>
+      <div className='container'>
+        <Header onAdd={() => setShowAddTask(!showAddTask)} />
+        <Route path='/' exact render={(props) => (
+          <>
+            {showAddTask && <AddTask onAdd={addTask} />}
+            {tasks.length > 0 ? <Tasks tasks={tasks} onToggle={toggleReminder}
+              onDelete={deleteTask} /> : <div className='no-to-do'>No Tasks To Do!</div>}
+          </>
+        )} />
+        <Route path='/about' component={About} />
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
