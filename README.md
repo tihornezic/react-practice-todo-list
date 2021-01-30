@@ -1,5 +1,5 @@
 # Usage
-`npm run server`
+### `npm run server`
 
 - since json server is used, run the above command so the tasks
 get called/stored from the local server (https://localhost:5001/tasks)
