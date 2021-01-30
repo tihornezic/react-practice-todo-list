@@ -1,3 +1,9 @@
+# Usage
+npm run server
+
+- since json server is used, run the above command so the tasks
+get called/stored from the local server (https://localhost:5001/tasks)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
